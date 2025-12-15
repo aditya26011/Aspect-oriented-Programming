@@ -41,4 +41,11 @@ public void beforeServiceImplCalls(){
 public void beforeTransactionalAnnotaionCalls(){
         log.info("Before Transactional Annotation calls");
 }
+
+    @Before("@annotation(com.codingshuttle.aopApp.aspects.MyLogging)")
+    public void beforeMyLoggingAnnotaionCalls(){
+        log.info("Before My Logging Annotation calls");
+    }
+
+
 }
