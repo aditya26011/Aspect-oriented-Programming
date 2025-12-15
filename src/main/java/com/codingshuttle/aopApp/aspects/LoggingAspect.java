@@ -2,9 +2,11 @@ package com.codingshuttle.aopApp.aspects;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -42,10 +44,20 @@ public void beforeTransactionalAnnotaionCalls(){
         log.info("Before Transactional Annotation calls");
 }
 
-    @Before("@annotation(com.codingshuttle.aopApp.aspects.MyLogging)")
+    @Before("myLoggingAndAopMethodsPointCut")
     public void beforeMyLoggingAnnotaionCalls(){
         log.info("Before My Logging Annotation calls");
     }
 
+    @After("myLoggingAndAopMethodsPointCut()")
+    public void afterMyLoggingAnnotationCalls(){
+        log.info("After My Logging Annotation calls");
+
+    }
+
+    @Pointcut("@annotation(com.codingshuttle.aopApp.aspects.MyLogging) && within(com.codingshuttle.aopApp..*)")
+    public void myLoggingAndAopMethodsPointCut(){
+
+    }
 
 }
